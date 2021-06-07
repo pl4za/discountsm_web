@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import Button from 'react-bootstrap/Button';
 
+import "bootswatch/dist/superhero/bootstrap.min.css"
 import './App.css';
 import './App.scss';
 
