@@ -1,7 +1,11 @@
+// @flow
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import Button from 'react-bootstrap/Button';
+
 import './App.css';
+import './App.scss';
 
 function App() {
   return (
