@@ -1,23 +1,65 @@
-// Override default variables before the import
 @import "~bootswatch/dist/zephyr/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/zephyr/bootswatch";
 
 .zero-padding {
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
 }
 
-.no-margin {
+card-footer-container {
+    @extend .container;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.zero-margin {
+    margin-top: 0;
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
 }
 
-slim-card-footer {
-    @extend .text-muted, .card-footer;
-    padding: 0.5rem 0.5rem;
+.zero-bottom-margin {
+    margin-bottom: 0;
 }
 
-.zero-bottom-margin {
-    margin-bottom: 0 !important;
+.crop-text {
+    -webkit-line-clamp: 2;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+card-footer {
+    @extend .text-muted, .card-footer;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+container-footer-row {
+    @extend .row, .align-items-center, .justify-content-between;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+deal-card-body {
+    @extend .card-body, .zero-padding, .zero-margin;
+}
+
+flat-container {
+    @extend .container, .zero-padding, .zero-margin;
+}
+
+deal-row {
+    @extend .row, .align-items-center, .justify-content-between;
+    margin-left: 0;
+    margin-right: 0;
 }
