@@ -61,11 +61,12 @@ function App() {
         <Card.Footer as="card-footer">
           <Container as="card-footer-container">
             <Row as="container-footer-row">
-              <Col md="auto">
+              <Col xs="auto">
                 <CalendarDate /> 2 days ago by JasonCosta
                   </Col>
-              <Col md="auto">
-                <Button size="sm"><Basket /> See deal</Button>
+              <Col xs="auto">
+                <Button size="sm" className="d-none d-sm-block"><Basket /> See deal</Button>
+                <Button size="sm" className="d-block d-sm-none"><Basket /></Button>
               </Col>
             </Row>
           </Container>
