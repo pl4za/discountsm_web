@@ -1,14 +1,13 @@
 // @flow
-import { React, useState } from 'react';
+import { React } from 'react';
 import logo from './logo.svg';
-import { Container, Row, Col, Nav, Image, ButtonGroup, Button, Card, Figure, ToggleButton } from 'react-bootstrap';
-import { ArrowUp, ArrowDown, Basket, CalendarDate } from 'react-bootstrap-icons';
+import { Container, Row, Col, Nav, Image, ButtonGroup, Button, Card, Figure } from 'react-bootstrap';
+import { ArrowUp, Basket, CalendarDate } from 'react-bootstrap-icons';
+import VotingButtons from './components/VotingButtons';
 
 import './App.scss';
 
 function App() {
-  const checked = useState(false);
-  const [radioValue, setRadioValue] = useState('1');
 
   return (
     <Container fluid>
@@ -39,28 +38,7 @@ function App() {
                     src={logo} />
                 </Figure>
                 <ButtonGroup className="show-xs-only">
-                  <ToggleButton
-                    key="vote-up"
-                    id="radio-up-xs"
-                    type="radio"
-                    variant="outline-success"
-                    name="radio"
-                    value={1}
-                    checked={radioValue === 1}
-                    onChange={e => setRadioValue(1)}>
-                    <ArrowUp />
-                  </ToggleButton>
-                  <ToggleButton
-                    key="vote-down"
-                    id="radio-down-xs"
-                    type="radio"
-                    variant="outline-danger"
-                    name="radio"
-                    value={-1}
-                    checked={radioValue === -1}
-                    onChange={e => setRadioValue(-1)}>
-                    <ArrowDown />
-                  </ToggleButton>
+                  <VotingButtons size={"xs"} />
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -78,28 +56,7 @@ function App() {
               </Col>
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                <ToggleButton
-                    key="vote-up"
-                    id="radio-up-md"
-                    type="radio"
-                    variant="outline-success"
-                    name="radio"
-                    value={1}
-                    checked={radioValue === 1}
-                    onChange={(e) => setRadioValue(e.currentTarget.value)}>
-                    <ArrowUp />
-                  </ToggleButton>
-                  <ToggleButton
-                    key="vote-down"
-                    id="radio-down-md"
-                    type="radio"
-                    variant="outline-danger"
-                    name="radio"
-                    value={-1}
-                    checked={radioValue === -1}
-                    onChange={(e) => setRadioValue(e.currentTarget.value)}>
-                    <ArrowDown />
-                  </ToggleButton>
+                  <VotingButtons size={"md"} />
                 </ButtonGroup>
               </Col>
             </Row>
@@ -122,7 +79,6 @@ function App() {
           </Container>
         </Card.Footer>
       </Card>
-
     </Container>
   );
 }
