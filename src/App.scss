@@ -50,6 +50,18 @@ container-footer-row {
     margin-right: 0;
 }
 
+[type='radio'] {
+    display: none; 
+}
+
+.show-xs-only {
+    @extend .d-block, .d-sm-none;
+}
+
+.show-md-only{
+    @extend .d-none, .d-sm-block;
+}
+
 deal-card-body {
     @extend .card-body, .zero-padding, .zero-margin;
 }
@@ -62,4 +74,23 @@ deal-row {
     @extend .row, .align-items-center, .justify-content-between;
     margin-left: 0;
     margin-right: 0;
+}
+
+deal-logo-column {
+    @extend .col;
+    padding-right: 0;
+}
+
+deal-logo {
+    @extend .figure;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#radio-up {
+    margin-bottom: 0;
+}
+
+.figure-img {
+    margin-bottom: 0;
 }
