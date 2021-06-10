@@ -63,7 +63,7 @@ function App() {
                 <Card.Text>
                   <Container>
                     <Row className="align-items-center">
-                      <h3 className="zero-bottom-margin">£11.50</h3>| Boots Deals
+                      <h4 className="zero-bottom-margin text-success">£11.50</h4>/<h5 className="zero-bottom-margin"><del>£9.50</del></h5>| Boots Deals
                     </Row>
                     <Row className="crop-text">
                       Decent offer. Features - Noise Cancellation - Up to 20 Hours Playtime (Featuring Quick Charge) - Soft Alcantara Fabric Headband - Noise-Rejecting Dual Microphone - Volume
@@ -95,10 +95,10 @@ function App() {
           <Container as="card-footer-container">
             <Row as="container-footer-row">
               <Col xs="auto">
-                <CalendarDate /> 2 days ago by JasonCosta
-                  </Col>
+                <CalendarDate className="footer-calendar"/> 2 days ago by JasonCosta
+              </Col>
               <Col xs="auto">
-                <Button size="sm" className="show-md-only"><Basket /> See deal</Button>
+                <Button size="sm" className="show-md-only"><Basket /> Get deal</Button>
                 <Button size="sm" className="show-xs-only"><Basket /></Button>
               </Col>
             </Row>
