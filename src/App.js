@@ -44,7 +44,7 @@ function App() {
                 </Figure>
                 <ButtonGroup className="show-xs-only">
                   {radios.map((radio, idx) => (
-                    <ToggleButton
+                    <ToggleButton 
                       key={idx}
                       id={`radio-${idx}`}
                       type="radio"

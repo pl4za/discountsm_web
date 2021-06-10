@@ -77,7 +77,7 @@ deal-row {
 }
 
 deal-logo-column {
-    @extend .col;
+    @extend .col, .d-flex, .justify-content-center, .flex-wrap;
     padding-right: 0;
 }
 
