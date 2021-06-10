@@ -7,12 +7,8 @@ import { ArrowUp, ArrowDown, Basket, CalendarDate } from 'react-bootstrap-icons'
 import './App.scss';
 
 function App() {
-  const [checked, setChecked] = useState(false);
+  const checked = useState(false);
   const [radioValue, setRadioValue] = useState('1');
-  const radios = [
-    { name: "up", value: '1' },
-    { name: "down", value: '-1' },
-  ];
 
   return (
     <Container fluid>
@@ -43,19 +39,28 @@ function App() {
                     src={logo} />
                 </Figure>
                 <ButtonGroup className="show-xs-only">
-                  {radios.map((radio, idx) => (
-                    <ToggleButton 
-                      key={idx}
-                      id={`radio-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? 'outline-danger' : 'outline-success'}
-                      name="radio"
-                      value={radio.value}
-                      checked={radioValue === radio.value}
-                      onChange={(e) => setRadioValue(e.currentTarget.value)}>
-                      {radio.name === "up" ? <ArrowUp /> : <ArrowDown />}
-                    </ToggleButton>
-                  ))}
+                  <ToggleButton
+                    key="vote-up"
+                    id="radio-up-xs"
+                    type="radio"
+                    variant="outline-success"
+                    name="radio"
+                    value={1}
+                    checked={radioValue === 1}
+                    onChange={e => setRadioValue(1)}>
+                    <ArrowUp />
+                  </ToggleButton>
+                  <ToggleButton
+                    key="vote-down"
+                    id="radio-down-xs"
+                    type="radio"
+                    variant="outline-danger"
+                    name="radio"
+                    value={-1}
+                    checked={radioValue === -1}
+                    onChange={e => setRadioValue(-1)}>
+                    <ArrowDown />
+                  </ToggleButton>
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -73,19 +78,28 @@ function App() {
               </Col>
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  {radios.map((radio, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`radio-${radio.name}`}
-                      type="radio"
-                      variant={idx % 2 ? 'outline-danger' : 'outline-success'}
-                      name="radio"
-                      value={radio.value}
-                      checked={radioValue === radio.value}
-                      onChange={(e) => setRadioValue(e.currentTarget.value)}>
-                      {radio.name === "up" ? <ArrowUp /> : <ArrowDown />}
-                    </ToggleButton>
-                  ))}
+                <ToggleButton
+                    key="vote-up"
+                    id="radio-up-md"
+                    type="radio"
+                    variant="outline-success"
+                    name="radio"
+                    value={1}
+                    checked={radioValue === 1}
+                    onChange={(e) => setRadioValue(e.currentTarget.value)}>
+                    <ArrowUp />
+                  </ToggleButton>
+                  <ToggleButton
+                    key="vote-down"
+                    id="radio-down-md"
+                    type="radio"
+                    variant="outline-danger"
+                    name="radio"
+                    value={-1}
+                    checked={radioValue === -1}
+                    onChange={(e) => setRadioValue(e.currentTarget.value)}>
+                    <ArrowDown />
+                  </ToggleButton>
                 </ButtonGroup>
               </Col>
             </Row>
@@ -94,8 +108,11 @@ function App() {
         <Card.Footer as="card-footer">
           <Container as="card-footer-container">
             <Row as="container-footer-row">
-              <Col xs="auto">
-                <CalendarDate className="footer-calendar"/> 2 days ago by JasonCosta
+              <Col xs="auto" className="show-md-only">
+                <CalendarDate className="footer-calendar" /> 2 days ago by JasonCosta | <ArrowUp /> 254 Upvotes
+              </Col>
+              <Col xs="auto" className="show-xs-only">
+                <CalendarDate className="footer-calendar" /> 2 days ago | <ArrowUp /> 254
               </Col>
               <Col xs="auto">
                 <Button size="sm" className="show-md-only"><Basket /> Get deal</Button>
