@@ -4,31 +4,37 @@ import { ToggleButton } from 'react-bootstrap';
 import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
 
 function VotingButtons(props) {
-  const checked = useState(false);
-  const [radioValue, setRadioValue] = useState('1');
+  const { size, updateScore } = props;
+  const [radioValue, setRadioValue] = useState(0);
 
   return (
     <>
       <ToggleButton
         key="vote-up"
-        id={`radio-up-${props.size}`}
+        id={`radio-up-${size}`}
         type="radio"
         variant="outline-success"
         name="radio"
         value={1}
         checked={radioValue === 1}
-        onChange={e => setRadioValue(1)}>
+        onChange={e => {
+          setRadioValue(1);
+          updateScore(1);
+        }}>
         <ArrowUp />
       </ToggleButton>
       <ToggleButton
         key="vote-down"
-        id={`radio-down-${props.size}`}
+        id={`radio-down-${size}`}
         type="radio"
         variant="outline-danger"
         name="radio"
         value={-1}
         checked={radioValue === -1}
-        onChange={e => setRadioValue(-1)}>
+        onChange={e => {
+          setRadioValue(-1);
+          updateScore(-1);
+        }}>
         <ArrowDown />
       </ToggleButton>
     </>
