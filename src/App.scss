@@ -1,5 +1,100 @@
-// Override default variables before the import
-$body-bg: #000;
+@import "~bootswatch/dist/zephyr/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/zephyr/bootswatch";
 
-// Import Bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss';
+.zero-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+card-footer-container {
+    @extend .container;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.zero-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.zero-bottom-margin {
+    margin-bottom: 0;
+}
+
+.crop-text {
+    -webkit-line-clamp: 2;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+card-footer {
+    @extend .text-muted, .card-footer;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+container-footer-row {
+    @extend .row, .align-items-center, .justify-content-between;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+[type='radio'] {
+    display: none; 
+}
+
+.show-xs-only {
+    @extend .d-block, .d-sm-none;
+}
+
+.show-md-only{
+    @extend .d-none, .d-sm-block;
+}
+
+deal-card-body {
+    @extend .card-body, .zero-padding, .zero-margin;
+}
+
+flat-container {
+    @extend .container, .zero-padding, .zero-margin;
+}
+
+deal-row {
+    @extend .row, .align-items-center, .justify-content-between;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+deal-logo-column {
+    @extend .col, .d-flex, .justify-content-center, .flex-wrap;
+    padding-right: 0;
+}
+
+deal-logo {
+    @extend .figure;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#radio-up-md {
+    margin-bottom: 0;
+}
+
+.figure-img {
+    margin-bottom: 0;
+}
+
+.footer-calendar {
+    margin-top: -2px;
+}
