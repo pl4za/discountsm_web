@@ -6,7 +6,7 @@ import { ArrowUp, Basket, CalendarDate } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
 
 function DealCard(props) {
-  const { id, title, description, newPrice, oldPrice, score, posted, expiry } = props.deal;
+  const { id, title, description, newPrice, oldPrice, score, posted, expiry, image } = props.deal;
   const [dealScore, setDealScore] = useState(score);
 
   return (
@@ -21,7 +21,7 @@ function DealCard(props) {
                     width={180}
                     height={180}
                     alt="deal_image"
-                    src={logo} />
+                    src={image} />
                 </Figure>
                 <ButtonGroup className="show-xs-only">
                   <VotingButtons size={"xs"} updateScore={setDealScore} />
