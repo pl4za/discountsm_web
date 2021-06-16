@@ -5,9 +5,9 @@ import { Container, Row, Col, ButtonGroup, Button, Card, Figure } from 'react-bo
 import { ArrowUp, Basket, CalendarDate } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
 
-function DealCard() {
-
-  const [dealScore, setDealScore] = useState(0);
+function DealCard(props) {
+  const { id, title, description, newPrice, oldPrice, score, posted, expiry } = props.deal;
+  const [dealScore, setDealScore] = useState(score);
 
   return (
     <>
@@ -28,21 +28,19 @@ function DealCard() {
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
-                <Card.Title className="crop-text">Bose® QuietComfort Headphones in Black</Card.Title>
+                <Card.Title className="crop-text">{title}</Card.Title>
                 <Card.Text>
                   <Container>
                     <Row className="align-items-center">
-                      <h4 className="zero-bottom-margin text-success">£11.50</h4>/<h5 className="zero-bottom-margin"><del>£9.50</del></h5>| Boots Deals
+                      <h4 className="zero-bottom-margin text-success">{newPrice.amount}{newPrice.currency}</h4>/<h5 className="zero-bottom-margin"><del>{oldPrice.amount}{oldPrice.currency}</del></h5>
                     </Row>
-                    <Row className="crop-text">
-                      Decent offer. Features - Noise Cancellation - Up to 20 Hours Playtime (Featuring Quick Charge) - Soft Alcantara Fabric Headband - Noise-Rejecting Dual Microphone - Volume
-                    </Row>
+                    <Row className="crop-text">{description}</Row>
                   </Container>
                 </Card.Text>
               </Col>
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  <VotingButtons size={"md"} updateScore={setDealScore} />
+                  <VotingButtons size={"md"} updateScore={setDealScore} score={score} />
                 </ButtonGroup>
               </Col>
             </Row>
@@ -52,10 +50,10 @@ function DealCard() {
           <Container as="card-footer-container">
             <Row as="container-footer-row">
               <Col xs="auto" className="show-md-only">
-                <CalendarDate className="footer-calendar" /> 2 days ago by JasonCosta | <ArrowUp /> {`${dealScore} Votes`}
+                <CalendarDate className="footer-calendar" /> 2 days ago <ArrowUp /> {`${dealScore} Votes`}
               </Col>
               <Col xs="auto" className="show-xs-only">
-                <CalendarDate className="footer-calendar" /> 2 days ago | <ArrowUp /> {dealScore}
+                <CalendarDate className="footer-calendar" /> 2 days ago <ArrowUp /> {dealScore}
               </Col>
               <Col xs="auto">
                 <Button size="sm" className="show-md-only"><Basket /> Get deal</Button>
