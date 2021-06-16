@@ -21,10 +21,8 @@ function App() {
 
   return (
     <Container fluid>
-
       {/* header */}
       <Row>
-        <Col><Image src={logo} rounded /></Col>
         <Col className="d-flex align-items-center">
           <Nav defaultActiveKey="/home" as="ul">
             <Nav.Item as="li">
@@ -33,7 +31,6 @@ function App() {
           </Nav>
         </Col>
       </Row>
-      {deals.map(deal => console.log(deal))}
       {deals.map(deal => <DealCard key={deal.id} deal={deal} />)}
     </Container>
   );

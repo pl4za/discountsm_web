@@ -1,17 +1,18 @@
 // @flow
 import { React, useState } from 'react';
-import logo from '../logo.svg';
 import { Container, Row, Col, ButtonGroup, Button, Card, Figure } from 'react-bootstrap';
-import { ArrowUp, Basket, CalendarDate } from 'react-bootstrap-icons';
+import { GraphUp, Basket, CalendarDate, CalendarPlus } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
+import TimeAgo from 'react-timeago'
 
 function DealCard(props) {
   const { id, title, description, newPrice, oldPrice, score, posted, expiry, image } = props.deal;
   const [dealScore, setDealScore] = useState(score);
 
+
   return (
     <>
-      <Card>
+      <Card as="deal-card">
         <Card.Body as="deal-card-body">
           <Container as="flat-container">
             <Row as="deal-row">
@@ -49,11 +50,17 @@ function DealCard(props) {
         <Card.Footer as="card-footer">
           <Container as="card-footer-container">
             <Row as="container-footer-row">
+              {/* web view */}
               <Col xs="auto" className="show-md-only">
-                <CalendarDate className="footer-calendar" /> 2 days ago <ArrowUp /> {`${dealScore} Votes`}
+                <CalendarDate className="footer-icon-calendar" />
+                <TimeAgo date={posted} />
+                <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={expiry} />
+                <GraphUp className="footer-icon" color="red" /> {dealScore}
               </Col>
+              {/* mobile view */}
               <Col xs="auto" className="show-xs-only">
-                <CalendarDate className="footer-calendar" /> 2 days ago <ArrowUp /> {dealScore}
+                <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
+                <GraphUp color="red" className="footer-icon" /> {dealScore}
               </Col>
               <Col xs="auto">
                 <Button size="sm" className="show-md-only"><Basket /> Get deal</Button>
