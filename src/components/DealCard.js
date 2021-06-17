@@ -1,14 +1,29 @@
 // @flow
 import { React, useState } from 'react';
-import { Container, Row, Col, ButtonGroup, Button, Card, Figure } from 'react-bootstrap';
-import { GraphUp, Basket, CalendarDate, CalendarPlus } from 'react-bootstrap-icons';
+import { Container, Row, Col, ButtonGroup, Button, Card, Figure, OverlayTrigger, Popover } from 'react-bootstrap';
+import { GraphUp, GraphDown, Basket, CalendarDate, CalendarPlus } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
 import TimeAgo from 'react-timeago'
 
 function DealCard(props) {
-  const { id, title, description, newPrice, oldPrice, score, posted, expiry, image } = props.deal;
-  const [dealScore, setDealScore] = useState(score);
+  const { title, description, newPrice, oldPrice, upVotes, downVotes, posted, expiry, link, image } = props.deal;
+  const [dealScore, setDealScore] = useState(upVotes + downVotes);
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Votes</Popover.Title>
+      <Popover.Content>
+        <Container>
+          <Row as="popover-votes-row">
+            <GraphUp className="graph-svg" color="green" />{upVotes} users voted up
+          </Row>
+          <Row as="popover-votes-row">
+            <GraphDown className="graph-svg" color="red" />{downVotes} users voted down
+          </Row>
+        </Container>
+      </Popover.Content>
+    </Popover>
+  );
 
   return (
     <>
@@ -19,6 +34,7 @@ function DealCard(props) {
               <Col as="deal-logo-column">
                 <Figure as="deal-logo">
                   <Figure.Image
+                    thumbnail
                     width={180}
                     height={180}
                     alt="deal_image"
@@ -41,7 +57,7 @@ function DealCard(props) {
               </Col>
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  <VotingButtons size={"md"} updateScore={setDealScore} score={score} />
+                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes + downVotes} />
                 </ButtonGroup>
               </Col>
             </Row>
@@ -55,16 +71,21 @@ function DealCard(props) {
                 <CalendarDate className="footer-icon-calendar" />
                 <TimeAgo date={posted} />
                 <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={expiry} />
-                <GraphUp className="footer-icon" color="red" /> {dealScore}
+                <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
+                  <GraphUp className="footer-icon graph-svg" color="green" />
+                </OverlayTrigger>
+                {dealScore} points
               </Col>
               {/* mobile view */}
               <Col xs="auto" className="show-xs-only">
                 <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
-                <GraphUp color="red" className="footer-icon" /> {dealScore}
+                <GraphUp color="green" className="footer-icon" /> {dealScore}
               </Col>
               <Col xs="auto">
-                <Button size="sm" className="show-md-only"><Basket /> Get deal</Button>
-                <Button size="sm" className="show-xs-only"><Basket /></Button>
+                {/* web view */}
+                <Button size="sm" className="show-md-only" href={link}><Basket className="button-svg" /> Get deal</Button>
+                {/* mobile view */}
+                <Button size="sm" className="show-xs-only" href={link}><Basket className="button-svg" /></Button>
               </Col>
             </Row>
           </Container>
