@@ -29,7 +29,6 @@ function VotingButtons(props) {
         disabled={radioValue === -1}>
         <ArrowDown />
       </AwesomeButton>
-
     </>
   );
 }

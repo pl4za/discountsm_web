@@ -46,8 +46,9 @@ function DealCard(props) {
                     alt="deal_image"
                     src={image} />
                 </Figure>
+                {/* mobile view */}
                 <ButtonGroup className="show-xs-only">
-                  <VotingButtons size={"xs"} updateScore={setDealScore} />
+                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes + downVotes} />
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -61,6 +62,7 @@ function DealCard(props) {
                   </Container>
                 </Card.Text>
               </Col>
+              {/* web view */}
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
                   <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes + downVotes} />
