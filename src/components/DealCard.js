@@ -82,12 +82,12 @@ function DealCard(props) {
                 <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
                   <GraphUp className="footer-icon graph-svg" color="green" />
                 </OverlayTrigger>
-                {dealScore} points
+                <b className="score-text">{dealScore} points</b>
               </Col>
               {/* mobile view */}
               <Col xs="auto" className="show-xs-only">
                 <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
-                <GraphUp color="green" className="footer-icon" /> {dealScore}
+                <GraphUp color="green" className="footer-icon" /> <b className="score-text">{dealScore}</b>
               </Col>
               {/* web view */}
               <Col xs="auto" className="show-md-only">
