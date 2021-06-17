@@ -76,6 +76,10 @@ deal-row {
     margin-right: 0;
 }
 
+popover-votes-row {
+    @extend .row, .align-items-center;
+}
+
 deal-logo-column {
     @extend .col, .d-flex, .justify-content-center, .flex-wrap;
     padding-right: 0;
@@ -83,8 +87,12 @@ deal-logo-column {
 
 deal-logo {
     @extend .figure;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    margin: 1rem 0 1rem;
+}
+
+deal-card {
+    @extend .card;
+    margin-bottom: 0.5rem;
 }
 
 #radio-up-md {
@@ -95,6 +103,27 @@ deal-logo {
     margin-bottom: 0;
 }
 
-.footer-calendar {
+.footer-icon-calendar {
     margin-top: -2px;
+    margin-right: 5px;
+}
+
+.footer-icon {
+    margin-left: 15px;
+}
+
+main-spinner {
+    @extend .spinner-grow, .text-danger;
+    position: fixed;
+    z-index: 1000;
+    top: 48%;
+    left: 48%;
+}
+
+.button-svg {
+    margin-bottom: 5px;
+}
+
+.graph-svg {
+    margin-right: 5px;
 }
