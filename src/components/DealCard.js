@@ -1,6 +1,6 @@
 // @flow
 import { React, useState } from 'react';
-import { Container, Row, Col, ButtonGroup, Button, Card, Figure, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Container, Row, Col, ButtonGroup, Card, Figure, OverlayTrigger, Popover } from 'react-bootstrap';
 import { GraphUp, GraphDown, Basket, CalendarDate, CalendarPlus } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
 import TimeAgo from 'react-timeago'
@@ -102,7 +102,8 @@ function DealCard(props) {
               <Col xs="auto" className="show-xs-only">
                 <AwesomeButtonProgress
                   type="primary"
-                  resultLabel="Success!"
+                  resultLabel="✓"
+                  loadingLabel="↑"
                   action={(element, next) => { openInNewTab(link); next(); }}>
                   <Basket className="button-svg" />
                 </AwesomeButtonProgress>
