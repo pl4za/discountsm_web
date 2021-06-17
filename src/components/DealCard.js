@@ -4,10 +4,16 @@ import { Container, Row, Col, ButtonGroup, Button, Card, Figure, OverlayTrigger,
 import { GraphUp, GraphDown, Basket, CalendarDate, CalendarPlus } from 'react-bootstrap-icons';
 import VotingButtons from './VotingButtons';
 import TimeAgo from 'react-timeago'
+import { AwesomeButtonProgress } from "react-awesome-button";
 
 function DealCard(props) {
   const { title, description, newPrice, oldPrice, upVotes, downVotes, posted, expiry, link, image } = props.deal;
   const [dealScore, setDealScore] = useState(upVotes + downVotes);
+
+  const openInNewTab = (url) => {
+    let win = window.open(url, '_blank');
+    win.focus();
+  }
 
   const popover = (
     <Popover id="popover-basic">
@@ -81,11 +87,23 @@ function DealCard(props) {
                 <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
                 <GraphUp color="green" className="footer-icon" /> {dealScore}
               </Col>
-              <Col xs="auto">
-                {/* web view */}
-                <Button size="sm" className="show-md-only" href={link}><Basket className="button-svg" /> Get deal</Button>
-                {/* mobile view */}
-                <Button size="sm" className="show-xs-only" href={link}><Basket className="button-svg" /></Button>
+              {/* web view */}
+              <Col xs="auto" className="show-md-only">
+                <AwesomeButtonProgress
+                  type="primary"
+                  resultLabel="Success!"
+                  action={(element, next) => { openInNewTab(link); next(); }}>
+                  <Basket className="button-svg" /> Get deal
+                </AwesomeButtonProgress>
+              </Col>
+              {/* mobile view */}
+              <Col xs="auto" className="show-xs-only">
+                <AwesomeButtonProgress
+                  type="primary"
+                  resultLabel="Success!"
+                  action={(element, next) => { openInNewTab(link); next(); }}>
+                  <Basket className="button-svg" />
+                </AwesomeButtonProgress>
               </Col>
             </Row>
           </Container>

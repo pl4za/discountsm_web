@@ -3,6 +3,7 @@ import { React, useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 import DealCard from './components/DealCard';
 
+import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <>
-      {isLoading && <Spinner as="main-spinner"/>}
+      {isLoading && <Spinner as="main-spinner" />}
       <Container fluid>
         {deals.map(deal => <DealCard key={deal.id} deal={deal} />)}
       </Container>

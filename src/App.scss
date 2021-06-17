@@ -1,6 +1,5 @@
 @import "~bootswatch/dist/zephyr/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/zephyr/bootswatch";
 
 .zero-padding {
     padding-top: 0;
@@ -95,7 +94,35 @@ deal-card {
     margin-bottom: 0.5rem;
 }
 
-#radio-up-md {
+.radio-up-md {
+    --button-default-height: 50px !important;
+
+    --button-disabled-color: #00b909 !important;
+    --button-disabled-color-dark: #018601 !important;
+    --button-disabled-color-hover: #06b900 !important;
+    --button-disabled-color-light: #fff;
+
+    --button-primary-color:  #9fb99f !important;
+    --button-primary-color-dark: #5f805f !important;
+    --button-primary-color-hover: #71af74 !important;
+    --button-primary-color-active: #17bb17 !important;
+
+    margin-bottom: 0;
+}
+
+.radio-down-md {
+    --button-default-height: 50px !important;
+    
+    --button-disabled-color: #b90000 !important;
+    --button-disabled-color-dark: #860101 !important;
+    --button-disabled-color-hover: #b90000 !important;
+    --button-disabled-color-light: #fff;
+
+    --button-primary-color:  #b69b9b !important;
+    --button-primary-color-dark: #816464 !important;
+    --button-primary-color-hover: #b47d7d !important;
+    --button-primary-color-active: #b82e2e !important;
+
     margin-bottom: 0;
 }
 
@@ -126,4 +153,29 @@ main-spinner {
 
 .graph-svg {
     margin-right: 5px;
+}
+
+.aws-btn {
+    --button-default-height: 32px;
+    --button-default-font-size: 14px;
+    --button-default-border-radius: 2px;
+    --button-horizontal-padding: 20px;
+    --button-raise-level: 4px;
+    --button-hover-pressure: 1;
+    --transform-speed: 0.175s;
+    --button-primary-color: #1e88e5;
+    --button-primary-color-dark: #1360a4;
+    --button-primary-color-light: #ffffff;
+    --button-primary-color-hover: #187bd1;
+    --button-primary-border: none;
+    --button-secondary-color: #f2f6f9;
+    --button-secondary-color-dark: #1360a4;
+    --button-secondary-color-light: #1e88e5;
+    --button-secondary-color-hover: #e1eaf1;
+    --button-secondary-border: 2px solid #1e88e5;
+    --button-anchor-color: #0e4f88;
+    --button-anchor-color-dark: #072743;
+    --button-anchor-color-light: #ffffff;
+    --button-anchor-color-hover: #0d4a7f;
+    --button-anchor-border: none;
 }
