@@ -13,7 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() =>
-    axios.get('http://localhost:8080/deals')
+    axios.get('http://localhost:8080/deals/users/954df33f-25a3-46e5-8375-93a5ffc1eaa4')
       .then(res => res.data)
       .then(data => {
         setDeals(data);
