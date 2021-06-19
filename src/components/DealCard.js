@@ -7,8 +7,8 @@ import TimeAgo from 'react-timeago'
 import { AwesomeButtonProgress } from "react-awesome-button";
 
 function DealCard(props) {
-  const { title, description, newPrice, oldPrice, upVotes, downVotes, posted, expiry, link, image } = props.deal;
-  const [dealScore, setDealScore] = useState(upVotes + downVotes);
+  const { id, title, description, newPrice, oldPrice, upVotes, downVotes, posted, expiry, link, image } = props.deal;
+  const [dealScore, setDealScore] = useState(upVotes - downVotes);
 
   const openInNewTab = (url) => {
     let win = window.open(url, '_blank');
@@ -48,7 +48,7 @@ function DealCard(props) {
                 </Figure>
                 {/* mobile view */}
                 <ButtonGroup className="show-xs-only">
-                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes + downVotes} />
+                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id}/>
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -65,7 +65,7 @@ function DealCard(props) {
               {/* web view */}
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes + downVotes} />
+                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id}/>
                 </ButtonGroup>
               </Col>
             </Row>

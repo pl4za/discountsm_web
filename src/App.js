@@ -2,6 +2,7 @@
 import { React, useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 import DealCard from './components/DealCard';
+import axios from 'axios';
 
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
@@ -12,8 +13,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() =>
-    fetch('http://localhost:8080/deals')
-      .then(res => res.json())
+    axios.get('http://localhost:8080/deals')
+      .then(res => res.data)
       .then(data => {
         setDeals(data);
         setIsLoading(false);
