@@ -48,7 +48,7 @@ function DealCard(props) {
                 </Figure>
                 {/* mobile view */}
                 <ButtonGroup className="show-xs-only">
-                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id}/>
+                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id} />
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -65,7 +65,7 @@ function DealCard(props) {
               {/* web view */}
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id}/>
+                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id} />
                 </ButtonGroup>
               </Col>
             </Row>
@@ -80,14 +80,21 @@ function DealCard(props) {
                 <TimeAgo date={posted} />
                 <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={expiry} />
                 <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
-                  <GraphUp className="footer-icon graph-svg" color="green" />
+                  <>
+                    {dealScore === 0 && <GraphUp className="footer-icon graph-svg" color="blue" />}
+                    {dealScore > 0 && <GraphUp className="footer-icon graph-svg" color="green" />}
+                    {dealScore < 0 && <GraphDown className="footer-icon graph-svg" color="red" />}
+                  </>
                 </OverlayTrigger>
                 <b className="score-text">{dealScore} points</b>
               </Col>
               {/* mobile view */}
               <Col xs="auto" className="show-xs-only">
                 <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
-                <GraphUp color="green" className="footer-icon" /> <b className="score-text">{dealScore}</b>
+                {dealScore === 0 && <GraphUp color="blue" className="footer-icon" />}
+                {dealScore > 0 && <GraphUp color="green" className="footer-icon" />}
+                {dealScore < 0 && <GraphDown color="red" className="footer-icon" />}
+                <b className="score-text">{dealScore}</b>
               </Col>
               {/* web view */}
               <Col xs="auto" className="show-md-only">
