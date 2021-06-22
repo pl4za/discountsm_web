@@ -1,34 +1,44 @@
 // @flow
 import { React, useEffect, useState } from 'react';
-import { Row, Container, Spinner } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import DealCard from './components/DealCard';
 import axios from 'axios';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { AwesomeButton } from "react-awesome-button";
 import { Google } from 'react-bootstrap-icons';
+import { ReactSession } from 'react-client-session';
 
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
 
 function App() {
-
+  const clientId = '28404597374-8qv4b00mmc2ur41mrqs7n5rcdekt7v2p.apps.googleusercontent.com';
   const [deals, setDeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const responseGoogle = (response) => {
-    console.log(response);
+  const loginGoogle = (response) => {
+    const token = response.getAuthResponse().id_token;
+    axios.put(`http://localhost:8080/users/auth/google`, { token })
+      .then(res => res.data)
+      .then(userId => {
+        ReactSession.setStoreType("localStorage");
+        ReactSession.set("userId", userId);
+        ReactSession.set("userToken", token);
+
+        axios.get(`http://localhost:8080/deals/users/${userId}`)
+          .then(res => res.data)
+          .then(data => {
+            setDeals(data);
+            setIsLoading(false);
+          })
+          .catch(console.log);
+      });
   }
 
-  useEffect(() =>
-    axios.get('http://localhost:8080/deals/users/954df33f-25a3-46e5-8375-93a5ffc1eaa4')
-      .then(res => res.data)
-      .then(data => {
-        setDeals(data);
-        setIsLoading(false);
-      })
-      .catch(console.log),
-    []
-  );
+  const logout = () => {
+    ReactSession.set("userId", undefined);
+    ReactSession.set("userToken", undefined);
+  }
 
   return (
     <>
@@ -36,13 +46,21 @@ function App() {
 
       <Container fluid>
         <GoogleLogin
-          clientId="28404597374-8qv4b00mmc2ur41mrqs7n5rcdekt7v2p.apps.googleusercontent.com"
+          clientId={clientId}
           buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
           isSignedIn={true}
+          onSuccess={loginGoogle}
+          onFailure={error => console.log(error)}
           render={renderProps =>
             <AwesomeButton type="primary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
+          }
+        />
+        <GoogleLogout
+          clientId={clientId}
+          buttonText="Logout"
+          onLogoutSuccess={logout}
+          render={renderProps =>
+            <AwesomeButton type="secondary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
           }
         />
       </Container>
