@@ -81,7 +81,7 @@ function App() {
       </Container>
 
       <Container fluid>
-        {deals.map(deal => <DealCard key={deal.id} deal={deal} />)}
+        {deals.map(deal => <DealCard key={deal.dealEntity.id + "_user_vote_" + deal.userVote} deal={deal} />)}
       </Container>
     </>
   );
