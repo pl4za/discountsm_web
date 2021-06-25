@@ -6,7 +6,7 @@ import axios from 'axios';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { AwesomeButton } from "react-awesome-button";
 import { Google } from 'react-bootstrap-icons';
-import { ReactSession } from 'react-client-session';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
@@ -18,27 +18,42 @@ function App() {
 
   const loginGoogle = (response) => {
     const token = response.getAuthResponse().id_token;
-    axios.put(`http://localhost:8080/users/auth/google`, { token })
+    const headers = {
+      'Authorization': token
+    };
+    axios.put(`http://localhost:8080/users/auth/google`, undefined, { headers })
       .then(res => res.data)
       .then(userId => {
-        ReactSession.setStoreType("localStorage");
-        ReactSession.set("userId", userId);
-        ReactSession.set("userToken", token);
-
-        axios.get(`http://localhost:8080/deals/users/${userId}`)
-          .then(res => res.data)
-          .then(data => {
-            setDeals(data);
-            setIsLoading(false);
-          })
-          .catch(console.log);
+        console.log("LOGGED IN AS " + userId);
+        reactLocalStorage.set("userId", userId);
+        reactLocalStorage.set("userToken", token);
       });
   }
 
   const logout = () => {
-    ReactSession.set("userId", undefined);
-    ReactSession.set("userToken", undefined);
+    reactLocalStorage.clear();
+    const userId = reactLocalStorage.get("userId");
+    console.log("LOGGED IN AS " + userId);
   }
+
+  useEffect(() => {
+    const userId = reactLocalStorage.get("userId");
+    console.log("LOGGED IN AS " + userId);
+    userId === undefined ?
+      axios.get(`http://localhost:8080/deals`)
+        .then(res => res.data)
+        .then(data => {
+          setDeals(data);
+          setIsLoading(false);
+        }).catch(console.log) :
+      axios.get(`http://localhost:8080/deals/users/${userId}`)
+        .then(res => res.data)
+        .then(data => {
+          setDeals(data);
+          setIsLoading(false);
+        }).catch(console.log)
+  }, []
+  );
 
   return (
     <>
@@ -48,7 +63,6 @@ function App() {
         <GoogleLogin
           clientId={clientId}
           buttonText="Login"
-          isSignedIn={true}
           onSuccess={loginGoogle}
           onFailure={error => console.log(error)}
           render={renderProps =>

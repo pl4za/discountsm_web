@@ -3,12 +3,12 @@ import { React, useState } from 'react';
 import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
 import { AwesomeButton } from "react-awesome-button";
 import axios from 'axios';
-import { ReactSession } from 'react-client-session';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 function VotingButtons(props) {
   const { size, updateScore, score, dealId, userVote } = props;
   const [radioValue, setRadioValue] = useState(userVote);
-  const userId = ReactSession.get("userId");
+  const userId = reactLocalStorage.get("userId");
 
   const scoreChanged = (dealId, update, userId) => {
     const vote = update === 1 ? "up" : "down";
