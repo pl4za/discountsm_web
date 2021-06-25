@@ -6,7 +6,7 @@ import axios from 'axios';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { AwesomeButton } from "react-awesome-button";
 import { Google } from 'react-bootstrap-icons';
-import {reactLocalStorage} from 'reactjs-localstorage';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
@@ -16,29 +16,9 @@ function App() {
   const [deals, setDeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loginGoogle = (response) => {
-    const token = response.getAuthResponse().id_token;
-    const headers = {
-      'Authorization': token
-    };
-    axios.put(`http://localhost:8080/users/auth/google`, undefined, { headers })
-      .then(res => res.data)
-      .then(userId => {
-        console.log("LOGGED IN AS " + userId);
-        reactLocalStorage.set("userId", userId);
-        reactLocalStorage.set("userToken", token);
-      });
-  }
-
-  const logout = () => {
-    reactLocalStorage.clear();
+  const getDeals = () => {
+    setIsLoading(true);
     const userId = reactLocalStorage.get("userId");
-    console.log("LOGGED IN AS " + userId);
-  }
-
-  useEffect(() => {
-    const userId = reactLocalStorage.get("userId");
-    console.log("LOGGED IN AS " + userId);
     userId === undefined ?
       axios.get(`http://localhost:8080/deals`)
         .then(res => res.data)
@@ -52,8 +32,29 @@ function App() {
           setDeals(data);
           setIsLoading(false);
         }).catch(console.log)
-  }, []
-  );
+  }
+
+  const loginGoogle = (response) => {
+    const token = response.getAuthResponse().id_token;
+    const headers = {
+      'Authorization': token
+    };
+    axios.put(`http://localhost:8080/users/auth/google`, undefined, { headers })
+      .then(res => res.data)
+      .then(userId => {
+        console.log("LOGGED IN AS " + userId);
+        reactLocalStorage.set("userId", userId);
+        reactLocalStorage.set("userToken", token);
+        getDeals();
+      });
+  }
+
+  const logout = () => {
+    reactLocalStorage.clear();
+    getDeals();
+  }
+
+  useEffect(() => getDeals(), []);
 
   return (
     <>
