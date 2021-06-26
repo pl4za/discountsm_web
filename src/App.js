@@ -1,11 +1,11 @@
 // @flow
 import { React, useEffect, useState } from 'react';
-import { Container, Spinner, Navbar, Nav, Image } from 'react-bootstrap';
+import { Container, Spinner, Navbar, Nav, Image, InputGroup, FormControl, Button } from 'react-bootstrap';
 import DealCard from './components/DealCard';
 import axios from 'axios';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { AwesomeButton } from "react-awesome-button";
-import { Google } from 'react-bootstrap-icons';
+import { Google, Search } from 'react-bootstrap-icons';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { googleClientId } from './Properties';
 import logo from './logo.svg';
@@ -62,7 +62,18 @@ function App() {
       <Navbar className="main-nav-bar" bg="primary" variant="dark">
         <Container fluid>
           <Navbar.Brand href="#home">
-            <Image className="nav-bar-logo" src={logo} rounded /> Discountsm</Navbar.Brand>
+            <Image className="nav-bar-logo" src={logo} rounded /> 
+            Discountsm</Navbar.Brand>
+          <Nav className="me-auto">
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="Search"
+              />
+              <Button variant="outline-secondary" id="button-search"><Search/></Button>
+            </InputGroup>
+          </Nav>
           <Nav className="me-auto">
             {userId === undefined ?
               <GoogleLogin

@@ -231,3 +231,10 @@ main-spinner {
     max-height: 40px;
     max-width: 40px;
 }
+
+#button-search {
+    margin-left: -5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 2;
+}
