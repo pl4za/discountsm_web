@@ -215,6 +215,10 @@ main-spinner {
     --button-anchor-border: none;
 }
 
+.show-xs-only .aws-btn {
+    --button-default-height: 30px;
+}
+
 .score-text {
     color: #2fb380;
 }
