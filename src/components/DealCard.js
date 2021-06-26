@@ -80,21 +80,25 @@ function DealCard(props) {
                 <CalendarDate className="footer-icon-calendar" />
                 <TimeAgo date={posted} />
                 <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={expiry} />
-                <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
-                  <>
-                    {dealScore === 0 && <GraphUp className="footer-icon graph-svg" color="blue" />}
-                    {dealScore > 0 && <GraphUp className="footer-icon graph-svg" color="green" />}
-                    {dealScore < 0 && <GraphDown className="footer-icon graph-svg" color="red" />}
-                  </>
+                <OverlayTrigger trigger={["hover", "focus"]} delay={{ show: 50, hide: 1000 }} placement="right" overlay={popover}>
+                  {
+                    (dealScore === 0 && <GraphUp className="footer-icon graph-svg" color="blue" />) ||
+                    (dealScore > 0 && <GraphUp className="footer-icon graph-svg" color="green" />) ||
+                    (dealScore < 0 && <GraphDown className="footer-icon graph-svg" color="red" />)
+                  }
                 </OverlayTrigger>
                 <b className="score-text">{dealScore} points</b>
               </Col>
               {/* mobile view */}
               <Col xs="auto" className="show-xs-only">
                 <CalendarDate className="footer-icon-calendar" /><TimeAgo date={posted} />
-                {dealScore === 0 && <GraphUp color="blue" className="footer-icon" />}
-                {dealScore > 0 && <GraphUp color="green" className="footer-icon" />}
-                {dealScore < 0 && <GraphDown color="red" className="footer-icon" />}
+                <OverlayTrigger trigger={["hover", "focus"]} delay={{ show: 50, hide: 1000 }} placement="right" overlay={popover}>
+                  {
+                    (dealScore === 0 && <GraphUp color="blue" className="footer-icon" />) ||
+                    (dealScore > 0 && <GraphUp color="green" className="footer-icon" />) ||
+                    (dealScore < 0 && <GraphDown color="red" className="footer-icon" />)
+                  }
+                </OverlayTrigger>
                 <b className="score-text">{dealScore}</b>
               </Col>
               {/* web view */}

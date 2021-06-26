@@ -26,14 +26,14 @@ function VotingButtons(props) {
         className={`radio-up-${size}`}
         type="primary"
         onPress={() => scoreChanged(dealId, 1, userId)}
-        disabled={radioValue === 1}>
+        disabled={radioValue === 1 || userId === undefined}>
         <ArrowUp />
       </AwesomeButton>
       <AwesomeButton
         className={`radio-down-${size}`}
         type="primary"
         onPress={() => scoreChanged(dealId, -1, userId)}
-        disabled={radioValue === -1}>
+        disabled={radioValue === -1 || userId === undefined}>
         <ArrowDown />
       </AwesomeButton>
     </>

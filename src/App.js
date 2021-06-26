@@ -7,32 +7,15 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { AwesomeButton } from "react-awesome-button";
 import { Google } from 'react-bootstrap-icons';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { googleClientId } from './Properties';
 
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './App.scss';
 
 function App() {
-  const clientId = '28404597374-8qv4b00mmc2ur41mrqs7n5rcdekt7v2p.apps.googleusercontent.com';
   const [deals, setDeals] = useState([]);
+  const [userId, setUserId] = useState(reactLocalStorage.get("userId"));
   const [isLoading, setIsLoading] = useState(true);
-
-  const getDeals = () => {
-    setIsLoading(true);
-    const userId = reactLocalStorage.get("userId");
-    userId === undefined ?
-      axios.get(`http://localhost:8080/deals`)
-        .then(res => res.data)
-        .then(data => {
-          setDeals(data);
-          setIsLoading(false);
-        }).catch(console.log) :
-      axios.get(`http://localhost:8080/deals/users/${userId}`)
-        .then(res => res.data)
-        .then(data => {
-          setDeals(data);
-          setIsLoading(false);
-        }).catch(console.log)
-  }
 
   const loginGoogle = (response) => {
     const token = response.getAuthResponse().id_token;
@@ -44,40 +27,58 @@ function App() {
       .then(userId => {
         console.log("LOGGED IN AS " + userId);
         reactLocalStorage.set("userId", userId);
-        reactLocalStorage.set("userToken", token);
-        getDeals();
+        setUserId(userId);
       });
   }
 
   const logout = () => {
     reactLocalStorage.clear();
-    getDeals();
+    setUserId(undefined);
   }
 
-  useEffect(() => getDeals(), []);
+  useEffect(() => {
+    const getDeals = () => {
+      setIsLoading(true);
+      userId === undefined ?
+        axios.get(`http://localhost:8080/deals`)
+          .then(res => res.data)
+          .then(data => {
+            setDeals(data);
+            setIsLoading(false);
+          }).catch(console.log) :
+        axios.get(`http://localhost:8080/deals/users/${userId}`)
+          .then(res => res.data)
+          .then(data => {
+            setDeals(data);
+            setIsLoading(false);
+          }).catch(console.log)
+    }
+    getDeals();
+  }, [userId]);
 
   return (
     <>
       {isLoading && <Spinner as="main-spinner" />}
 
       <Container fluid>
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Login"
-          onSuccess={loginGoogle}
-          onFailure={error => console.log(error)}
-          render={renderProps =>
-            <AwesomeButton type="primary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
-          }
-        />
-        <GoogleLogout
-          clientId={clientId}
-          buttonText="Logout"
-          onLogoutSuccess={logout}
-          render={renderProps =>
-            <AwesomeButton type="secondary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
-          }
-        />
+        {userId === undefined ?
+          <GoogleLogin
+            clientId={googleClientId}
+            buttonText="Login"
+            onSuccess={loginGoogle}
+            onFailure={error => console.log(error)}
+            render={renderProps =>
+              <AwesomeButton type="primary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
+            }
+          /> :
+          <GoogleLogout
+            clientId={googleClientId}
+            buttonText="Logout"
+            onLogoutSuccess={logout}
+            render={renderProps =>
+              <AwesomeButton type="secondary" onPress={() => renderProps.onClick()} disabled={renderProps.disabled}><Google /></AwesomeButton>
+            }
+          />}
       </Container>
 
       <Container fluid>
