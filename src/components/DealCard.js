@@ -54,10 +54,12 @@ function DealCard(props) {
               </Col>
               <Col xs={8}>
                 <Card.Title className="crop-text">{title}</Card.Title>
-                <Card.Text>
+                <Card.Text as="span">
                   <Container>
                     <Row className="align-items-center">
-                      <h4 className="zero-bottom-margin text-success">{newPriceMoney.amount}{newPriceMoney.currencyCode}</h4>/<h5 className="zero-bottom-margin"><del>{oldPriceMoney.amount}{oldPriceMoney.currencyCode}</del></h5>
+                      <h4 className="zero-bottom-margin text-success">{newPriceMoney.amount}{newPriceMoney.currencyCode}</h4>
+                      /
+                      <h5 className="zero-bottom-margin"><del>{oldPriceMoney.amount}{oldPriceMoney.currencyCode}</del></h5>
                     </Row>
                     <Row className="crop-text">{description}</Row>
                   </Container>
