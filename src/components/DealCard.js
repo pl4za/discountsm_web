@@ -57,7 +57,7 @@ function DealCard(props) {
                 <Card.Text>
                   <Container>
                     <Row className="align-items-center">
-                      <h4 className="zero-bottom-margin text-success">{newPriceMoney.amount}{newPriceMoney.currency}</h4>/<h5 className="zero-bottom-margin"><del>{oldPriceMoney.amount}{oldPriceMoney.currency}</del></h5>
+                      <h4 className="zero-bottom-margin text-success">{newPriceMoney.amount}{newPriceMoney.currencyCode}</h4>/<h5 className="zero-bottom-margin"><del>{oldPriceMoney.amount}{oldPriceMoney.currencyCode}</del></h5>
                     </Row>
                     <Row className="crop-text">{description}</Row>
                   </Container>
