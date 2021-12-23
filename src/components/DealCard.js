@@ -80,8 +80,8 @@ function DealCard(props) {
               {/* web view */}
               <Col xs="auto" className="show-md-only">
                 <CalendarDate className="footer-icon-calendar" />
-                <TimeAgo date={posted} />
-                <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={expiry} />
+                <TimeAgo date={new Date(posted * 1000)} />
+                <CalendarPlus className="footer-icon" /> Expires in <TimeAgo formatter={(value, unit, suffix) => `${value} ${unit}s`} date={new Date(expiry * 1000)} />
                 <OverlayTrigger trigger={["hover", "focus"]} delay={{ show: 50, hide: 1000 }} placement="right" overlay={popover}>
                   {
                     (dealScore === 0 && <GraphUp className="footer-icon graph-svg" color="blue" />) ||
