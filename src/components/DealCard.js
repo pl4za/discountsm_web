@@ -49,7 +49,7 @@ function DealCard(props) {
                 </Figure>
                 {/* mobile view */}
                 <ButtonGroup className="show-xs-only">
-                  <VotingButtons size={"xs"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id} userVote={userVote} />
+                  <VotingButtons size={"xs"} updateScore={setDealScore} dealId={id} userVote={userVote} />
                 </ButtonGroup>
               </Col>
               <Col xs={8}>
@@ -68,7 +68,7 @@ function DealCard(props) {
               {/* web view */}
               <Col xs="auto" className="show-md-only">
                 <ButtonGroup vertical>
-                  <VotingButtons size={"md"} updateScore={setDealScore} score={upVotes - downVotes} dealId={id} userVote={userVote} />
+                  <VotingButtons size={"md"} updateScore={setDealScore} dealId={id} userVote={userVote} />
                 </ButtonGroup>
               </Col>
             </Row>
@@ -107,7 +107,7 @@ function DealCard(props) {
               <Col xs="auto" className="show-md-only">
                 <AwesomeButtonProgress
                   type="primary"
-                  resultLabel="Success!"
+                  resultLabel="Enjoy!"
                   action={(element, next) => { openInNewTab(dealLink); next(); }}>
                   <Basket className="button-svg" /> Get deal
                 </AwesomeButtonProgress>
