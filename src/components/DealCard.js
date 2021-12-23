@@ -7,7 +7,7 @@ import TimeAgo from 'react-timeago'
 import { AwesomeButtonProgress } from "react-awesome-button";
 
 function DealCard(props) {
-  const { id, title, description, newPrice, oldPrice, upVotes, downVotes, posted, expiry, link, image } = props.deal.dealEntity;
+  const { id, title, description, newPriceMoney, oldPriceMoney, upVotes, downVotes, posted, expiry, dealLink, imageLink } = props.deal;
   const userVote = props.deal.userVote;
   const [dealScore, setDealScore] = useState(upVotes - downVotes);
 
@@ -45,7 +45,7 @@ function DealCard(props) {
                     width={180}
                     height={180}
                     alt="deal_image"
-                    src={image} />
+                    src={imageLink} />
                 </Figure>
                 {/* mobile view */}
                 <ButtonGroup className="show-xs-only">
@@ -57,7 +57,7 @@ function DealCard(props) {
                 <Card.Text>
                   <Container>
                     <Row className="align-items-center">
-                      <h4 className="zero-bottom-margin text-success">{newPrice.amount}{newPrice.currency}</h4>/<h5 className="zero-bottom-margin"><del>{oldPrice.amount}{oldPrice.currency}</del></h5>
+                      <h4 className="zero-bottom-margin text-success">{newPriceMoney.amount}{newPriceMoney.currency}</h4>/<h5 className="zero-bottom-margin"><del>{oldPriceMoney.amount}{oldPriceMoney.currency}</del></h5>
                     </Row>
                     <Row className="crop-text">{description}</Row>
                   </Container>
@@ -106,7 +106,7 @@ function DealCard(props) {
                 <AwesomeButtonProgress
                   type="primary"
                   resultLabel="Success!"
-                  action={(element, next) => { openInNewTab(link); next(); }}>
+                  action={(element, next) => { openInNewTab(dealLink); next(); }}>
                   <Basket className="button-svg" /> Get deal
                 </AwesomeButtonProgress>
               </Col>
@@ -116,7 +116,7 @@ function DealCard(props) {
                   type="primary"
                   resultLabel="✓"
                   loadingLabel="↑"
-                  action={(element, next) => { openInNewTab(link); next(); }}>
+                  action={(element, next) => { openInNewTab(dealLink); next(); }}>
                   <Basket className="button-svg" />
                 </AwesomeButtonProgress>
               </Col>

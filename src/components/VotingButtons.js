@@ -13,7 +13,7 @@ function VotingButtons(props) {
   const scoreChanged = (dealId, update, userId) => {
     const vote = update === 1 ? "up" : "down";
 
-    axios.put(`http://localhost:8080/deals/${dealId}/users/${userId}/${vote}-vote`)
+    axios.put(`http://localhost:8080/api/v1/deal/${dealId}/${vote}-vote`)
       .then(() => {
         setRadioValue(update);
         updateScore(score + update);
